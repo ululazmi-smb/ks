@@ -30,6 +30,22 @@ $("#pelanggan").select2({
     }
 });
 
+$("#src_barang").select2({
+    placeholder: "src_barang",
+    ajax: {
+        url: getBarcodeUrl,
+        type: "post",
+        dataType: "json",
+        data: params => ({
+            barcode: params.term
+        }),
+        processResults: res => ({
+            results: res
+        }),
+        cache: true
+    }
+});
+
 function getNota1()
 {
     transaksi.clear().draw();
