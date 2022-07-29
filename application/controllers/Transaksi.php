@@ -189,7 +189,6 @@ class Transaksi extends CI_Controller {
 	public function add_keranjang()
 	{
 		header('Content-type: application/json');
-
 		$barcode = $this->input->post("barcode");
 		$type = $this->input->post("type");
 		$jumlah = $this->input->post("jumlah");
@@ -256,6 +255,66 @@ class Transaksi extends CI_Controller {
 				$array = array(
 					"response" => "error",
 					"messages" => "stok kosong"
+				);
+			}
+		}
+		echo json_encode($array);
+
+	}
+
+	public function add_keranjang2()
+	{
+		header('Content-type: application/json');
+		$barcode = $this->input->post("id_barang");
+		$type = $this->input->post("type");
+		$jumlah = $this->input->post("jumlah");
+		if($jumlah == "")
+		{
+			$jumlah = 1;
+		}
+		$barcode2 = $this->Produk_model->getBarcodev2($barcode);
+		$cek_keranjang = $this->db->get_where("keranjang", array("id_barang" => $barcode2->id, 'kasir' => $this->session->userdata('id')));
+		if($cek_keranjang->num_rows() > 0)
+		{
+			$data_keranjang = $cek_keranjang->row();
+			if(($data_keranjang->jumlah + $jumlah) <= $barcode2->stok)
+			{
+				if($data_keranjang->jumlah < 1)
+				{
+					$sql = $this->db->delete("keranjang", "id=".$data_keranjang->id);
+				} else {
+					if($data_keranjang->jumlah > $barcode2->minimal_grosir && $type == 1)
+					{
+						$sql = $this->db->update("keranjang", array("jumlah" => $data_keranjang->jumlah + $jumlah, "harga" => $barcode2->harga_grosir), "id=".$data_keranjang->id);
+					} else {
+						$sql = $this->db->update("keranjang", array("jumlah" => $data_keranjang->jumlah + $jumlah, "harga" => $barcode2->harga), "id=".$data_keranjang->id);
+					}
+				}
+				$array = array(
+					"response" => "success"
+				);
+			} else {
+				$array = array(
+					"response" => "error",
+					"messages" => "stok kurang"
+				);
+			}
+		} else {
+			if($jumlah < 1)
+			{
+				$array = array(
+					"response" => "error",
+					"messages" => "tidak ada barang yang di kurangi"
+				);
+			} else {
+				$sql = $this->db->insert("keranjang", array(
+					"id_barang" => $barcode2->id,
+					"harga" => $barcode2->harga,
+					"jumlah" => 1,
+					"kasir" => $this->session->userdata('id')
+				));
+				$array = array(
+					"response" => "success"
 				);
 			}
 		}
