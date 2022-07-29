@@ -189,7 +189,7 @@
           <div class="form-group">
             <label>Nama Produk</label>
               <div class="form-inline">
-                <select id="barcode" class="form-control select2 col-sm-12" onchange="getNama()"></select>
+                <select id="src_barang" class="form-control select2 col-sm-12" onchange="getNama()"></select>
               </div>       
           </div>
           <button class="btn btn-success" type="button" data-dismiss="modal" onclick="save_jumlah()">save</button>
@@ -217,8 +217,7 @@
   var savetrxBarang = '<?php echo site_url('transaksi/savetrxBarang') ?>';
   var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
   var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
-
-
+  var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
 </script>
 <script src="<?php echo base_url('assets/js/unminify/transaksiv2.js') ?>"></script>
 </body>
