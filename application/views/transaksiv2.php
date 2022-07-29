@@ -217,7 +217,7 @@
   var savetrxBarang = '<?php echo site_url('transaksi/savetrxBarang') ?>';
   var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
   var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
-  var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
+  var getBarcodeUrl = '<?php echo site_url('produk/get_barcode') ?>';
 </script>
 <script src="<?php echo base_url('assets/js/unminify/transaksiv2.js') ?>"></script>
 </body>
