@@ -55,7 +55,10 @@ function getNama() {
             id: $("#src_barang").val()
         },
         success: res => {
-            console.log(res);
+            $("#sisa_produk").val(res.stok);
+            $("#harga_produk").val(res.harga);
+            $("#harga_grosir").val(res.harga_grosir);
+            $("#minimal_grosir").val(res.minimal_grosir);
         },
         error: err => {
             console.log(err)

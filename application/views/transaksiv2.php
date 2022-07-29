@@ -190,7 +190,54 @@
             <label>Nama Produk</label>
               <select id="src_barang" class="form-control select2 col-12" onchange="getNama()"></select>
           </div>
-          <button class="btn btn-success" type="button" data-dismiss="modal" onclick="save_jumlah()">save</button>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Sisa</label>
+                  <div class="form-inline">
+                    <input type="text" class="form-control  col-12" placeholder="Nama Produk" id="sisa_produk" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Harga</label>
+                  <div class="form-inline">
+                    <input type="text" class="form-control col-12" placeholder="Nama Produk" id="harga_produk" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Harga Grosir</label>
+                  <div class="form-inline">
+                    <input type="text" class="form-control col-12" placeholder="Nama Produk" id="harga_grosir" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label>Min Grosir</label>
+                  <div class="form-inline">
+                    <input type="text" class="form-control col-12" placeholder="Nama Produk" id="minimal_grosir" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+              <label>Pelanggan</label>
+              <select name="type_pelanggan" id="type_pelanggan" class="form-control">
+              <option value="0">biasa</option>
+              <option value="1">member</option>
+              </select>
+            </div>
+          <div class="form-group">
+            <label>Jumlah Pembelian</label>
+            <input type="text" class="form-control" name="jumlah_pembelian" id="jumlah_pembelian" value="0" require>
+          </div>
+          <button class="btn btn-success" type="button" data-dismiss="modal" onclick="">add</button>
           <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </form>
       </div>
