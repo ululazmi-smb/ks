@@ -31,7 +31,7 @@ $("#pelanggan").select2({
 });
 
 $("#src_barang").select2({
-    placeholder: "src_barang",
+    placeholder: "cari barang",
     ajax: {
         url: getBarcodeUrl,
         type: "post",
@@ -45,6 +45,23 @@ $("#src_barang").select2({
         cache: true
     }
 });
+
+function getNama() {
+    $.ajax({
+        url: produkGetNamaUrl,
+        type: "post",
+        dataType: "json",
+        data: {
+            id: $("#src_barang").val()
+        },
+        success: res => {
+            console.log(res);
+        },
+        error: err => {
+            console.log(err)
+        }
+    })
+}
 
 function getNota1()
 {

@@ -188,9 +188,7 @@
         <form id="form">
           <div class="form-group">
             <label>Nama Produk</label>
-              <div class="form-inline">
-                <select id="src_barang" class="form-control select2 col-sm-12" onchange="getNama()"></select>
-              </div>       
+              <select id="src_barang" class="form-control select2 col-12" onchange="getNama()"></select>
           </div>
           <button class="btn btn-success" type="button" data-dismiss="modal" onclick="save_jumlah()">save</button>
           <button class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -210,6 +208,7 @@
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/adminlte/plugins/moment/moment.min.js') ?>"></script>
 <script>
+  var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
   var getNota = '<?php echo site_url('transaksi/get_keranjang') ?>';
   var urlAddKeranjang = '<?php echo site_url('transaksi/add_keranjang') ?>';
   var urlRemoveBarang = '<?php echo site_url('transaksi/RemoveBarang') ?>';
