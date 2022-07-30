@@ -237,7 +237,7 @@
             <label>Jumlah Pembelian</label>
             <input type="text" class="form-control" name="jumlah_pembelian" id="jumlah_pembelian" value="0" require>
           </div>
-          <button class="btn btn-success" type="button" data-dismiss="modal" onclick="">add</button>
+          <button class="btn btn-success" type="button" data-dismiss="modal" onclick="addKeranjang2()">add</button>
           <button class="btn btn-danger" data-dismiss="modal">Close</button>
         </form>
       </div>
@@ -258,6 +258,7 @@
   var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
   var getNota = '<?php echo site_url('transaksi/get_keranjang') ?>';
   var urlAddKeranjang = '<?php echo site_url('transaksi/add_keranjang') ?>';
+  var urlAddKeranjang2 = '<?php echo site_url('transaksi/add_keranjang2') ?>';
   var urlRemoveBarang = '<?php echo site_url('transaksi/RemoveBarang') ?>';
   var urlEditJumBarang = '<?php echo site_url('transaksi/urlEditJumBarang') ?>';
   var savetrxBarang = '<?php echo site_url('transaksi/savetrxBarang') ?>';

@@ -189,6 +189,36 @@ function addKeranjang()
 
 }
 
+function addKeranjang2()
+{
+    $.ajax({
+        url: urlAddKeranjang2,
+        type: "POST",
+        dataType: "json",
+        data: {
+            barcode: $("#src_barang").val(),
+            type: $("#type_pelanggan").val(),
+            jumlah: $("#jumlah_pembelian").val()
+        },
+        success: res => {
+            getNota1();
+            $("#jumlah").val("1");
+            document.getElementById("barcode").select();
+            $("#barcode").val("");
+            if(res.response == "success")
+            {
+            } else if(res.response == "error")
+            {
+                Swal.fire("Sukses", res.messages, "danger");
+            }
+        },
+        error: err => {
+            console.log(err)
+        }
+    })
+
+}
+
 function nota(jumlah) {
     let hasil = "",
         char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",

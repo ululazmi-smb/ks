@@ -55,6 +55,12 @@ class Produk_model extends CI_Model {
 		return $db;
 	}
 
+	public function getBarcodev3($search='')
+	{
+		$db = $this->db->get_where("produk",array("id" => $search))->row();
+		return $db;
+	}
+
 	public function getNama($id)
 	{
 		$this->db->select('nama_produk, stok, harga,minimal_grosir,harga_grosir');
