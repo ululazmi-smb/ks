@@ -240,15 +240,23 @@ class Transaksi extends CI_Controller {
 							"messages" => "tidak ada barang yang di kurangi"
 						);
 					} else {
-						$sql = $this->db->insert("keranjang", array(
-							"id_barang" => $barcode2->id,
-							"harga" => $barcode2->harga,
-							"jumlah" => 1,
-							"kasir" => $this->session->userdata('id')
-						));
-						$array = array(
-							"response" => "success"
-						);
+						if($barcode2->stok < $jumlah)
+						{
+							$array = array(
+								"response" => "error",
+								"messages" => "stok kurang"
+							);
+						} else {
+							$sql = $this->db->insert("keranjang", array(
+								"id_barang" => $barcode2->id,
+								"harga" => $barcode2->harga,
+								"jumlah" => $jumlah,
+								"kasir" => $this->session->userdata('id')
+							));
+							$array = array(
+								"response" => "success"
+							);
+						}
 					}
 				}
 			} else {
@@ -316,15 +324,23 @@ class Transaksi extends CI_Controller {
 							"messages" => "tidak ada barang yang di kurangi"
 						);
 					} else {
-						$sql = $this->db->insert("keranjang", array(
-							"id_barang" => $barcode2->id,
-							"harga" => $barcode2->harga,
-							"jumlah" => 1,
-							"kasir" => $this->session->userdata('id')
-						));
-						$array = array(
-							"response" => "success"
-						);
+						if($barcode2->stok < $jumlah)
+						{
+							$array = array(
+								"response" => "error",
+								"messages" => "stok kurang"
+							);
+						} else {
+							$sql = $this->db->insert("keranjang", array(
+								"id_barang" => $barcode2->id,
+								"harga" => $barcode2->harga,
+								"jumlah" => $jumlah,
+								"kasir" => $this->session->userdata('id')
+							));
+							$array = array(
+								"response" => "success"
+							);
+						}
 					}
 				}
 			} else {
