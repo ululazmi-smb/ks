@@ -53,7 +53,7 @@
             <div class="form-group">
               <label>Barcode</label>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Barcode" id="barcode">
+                <input type="text" class="form-control" placeholder="Barcode" onkeyup="load_tombol()" id="barcode">
                 <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#edit_data1' >Cari barang</button>
               </div>
             </div>
@@ -77,6 +77,7 @@
             
             <div class="form-group">
               <button id="bayar" class="btn btn-success" data-toggle="modal" data-target="#modal" disabled>Bayar</button>
+              <button id="add_keranjang" class="btn btn-success" type="button" data-dismiss="modal" onclick="addKeranjang()" disabled>add</button>
             </div>
           </div>
 

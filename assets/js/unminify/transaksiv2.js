@@ -219,6 +219,16 @@ function addKeranjang2()
 
 }
 
+function load_tombol()
+{
+    if($("#barcode").val() != "")
+    {
+        $("#add_keranjang").removeAttr("disabled", "disabled");
+    } else {
+        $("#add_keranjang").attr("disabled", "disabled");
+    }
+}
+
 function nota(jumlah) {
     let hasil = "",
         char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
