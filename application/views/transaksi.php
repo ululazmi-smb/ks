@@ -69,7 +69,7 @@
               <button id="bayar" class="btn btn-success" data-toggle="modal" data-target="#modal" disabled>Bayar</button>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-sm-3">
             <div class="form-group">
               <label>Nama Produk</label>
               <input type="text" class="form-control" placeholder="Nama Produk" id="nama_produk" disabled>
