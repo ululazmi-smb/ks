@@ -135,6 +135,7 @@ class Transaksi extends CI_Controller {
 		{
 			$dat = $this->db->get_where("produk", array("id"=>$data2->id_barang))->row();
 			// $produk = array($dat->barcode);
+			error_reporting(0);
 			$this->transaksi_model->removeStok($data2->id_barang, ($dat->stok - $data2->jumlah));
 			$this->transaksi_model->addTerjual($data2->id_barang, ($dat->terjual + $data2->jumlah));
 			if($i == 0)
