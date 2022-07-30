@@ -237,7 +237,7 @@
             </div>
           <div class="form-group">
             <label>Jumlah Pembelian</label>
-            <input type="text" class="form-control" name="jumlah_pembelian" id="jumlah_pembelian" value="0" require>
+            <input type="text" class="form-control" name="jumlah_pembelian" id="jumlah_pembelian" value="1" require>
           </div>
           <button class="btn btn-success" type="button" data-dismiss="modal" onclick="addKeranjang2()">add</button>
           <button class="btn btn-danger" data-dismiss="modal">Close</button>
