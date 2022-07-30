@@ -256,6 +256,12 @@ function bayar() {
     add();
 }
 
+function uang_pas()
+{
+    $('[name="jumlah_uang"').val($("#total").html());
+    kembalian();
+}
+
 function checkUang() {
     let jumlah_uang = $('[name="jumlah_uang"').val(),
         total_bayar = parseInt($(".total_bayar").html());

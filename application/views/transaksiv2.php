@@ -133,7 +133,10 @@
       </div>
       <div class="form-group">
         <label>Jumlah Uang</label>
-        <input placeholder="Jumlah Uang" type="number" class="form-control" name="jumlah_uang" onkeyup="kembalian()" required>
+        <div class="input-group">
+          <input placeholder="Jumlah Uang" type="number" class="form-control" name="jumlah_uang" onkeyup="kembalian()" required>
+          <button id="uang_pas" class="btn btn-success" type="submit" onclick="uang_pas()">uang pas</button>
+        </div>
       </div>
       <div class="form-group">
         <label>Diskon</label>
