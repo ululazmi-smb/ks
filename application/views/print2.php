@@ -38,19 +38,20 @@
 	<hr/>
 	<table width="100%" class="tabel">
 	<?php 
-	$jumlah_all = 0;
-		foreach ($produk as $key): 
-		$total = ($key->total * $key->harga);
+		$jumlah_all = 0;
+		for($i = 0; $i < count($produk) ; $i++)
+		{
+			$total = ($produk[$i]['qty'] * $produk[$i]['harga']);
 		$jumlah_all = $jumlah_all + $total;
 	?>
 	  <tr>
-		<td colspan="2"><?php echo $key->nama_produk ?></td>
+		<td colspan="2"><?php echo $produk[$i]['nama'] ?></td>
 	  </tr>
 	  <tr>
-		<td width="50%" style="text-align:right"><?php echo $key->total ?> X <?php echo $key->harga ?></td>
+		<td width="50%" style="text-align:right"><?php echo $produk[$i]['qty'] ?> X <?php echo $produk[$i]['harga']?></td>
 	  	<td style="float:right"><?=$total;?></td>
 	  </tr>
-	<?php endforeach ?>
+	<?php }?>
 	</table>
 	<hr/>
 	<table width="100%" class="tabel">

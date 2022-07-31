@@ -23,6 +23,45 @@ class Transaksi extends CI_Controller {
 		$this->load->view('transaksiv2');
 	}
 
+	public function migrate_transaksi()
+	{
+		$sql1 = $this->db->get_where("transaksi")->result();
+		foreach($sql1 as $produk)
+		{
+			$barcode = explode(',', $produk->barcode);
+			$nama = "";
+			$i = 0;
+			foreach($barcode as $key => $none)
+			{
+				$sql = $this->db->get_where("produk",array("id"=>$none));
+				if($sql->num_rows() > 0)
+				{
+					if($i == 0)
+					{
+						$nama = $sql->row()->nama_produk;
+					} else {
+						$nama = $nama.",".$sql->row()->nama_produk;
+					}
+					$i++;
+				}
+			}
+			$data2 = array(
+				'tanggal' => $produk->tanggal,
+				'nama' => $nama,
+				'barcode' => $produk->barcode,
+				'diskon_barang' => $produk->diskon_barang,
+				'qty' => $produk->qty,
+				'total_bayar' => $produk->total_bayar,
+				'jumlah_uang' => $produk->jumlah_uang,
+				'diskon' => $produk->diskon,
+				'pelanggan' => $produk->pelanggan,
+				'nota' => $produk->nota,
+				'kasir' => $produk->kasir
+			);
+			$this->db->insert("transaksiv2", $data2);
+		}
+	}
+
 	public function read()
 	{
 		// header('Content-type: application/json');
@@ -69,10 +108,10 @@ class Transaksi extends CI_Controller {
 		$produk2 = $this->input->post('produk2');
 		$tanggal = new DateTime($this->input->post('tanggal'));
 		$barcode = "";
+		$nama = "";
 		foreach ($produk as $produk) {
 			$this->transaksi_model->removeStok($produk->id, $produk->stok);
 			$this->transaksi_model->addTerjual($produk->id, $produk->terjual);
-			// array_push($barcode, $produk->id);
 		}
 
 		for($i = 0; $i < count($produk2); $i++)
@@ -81,14 +120,15 @@ class Transaksi extends CI_Controller {
 			if($i == 0)
 			{
 				$barcode = $db->row()->id;
+				$nama = $db->row()->nama_produk;
 			} else {
 				$barcode = $barcode. "," .$db->row()->id;
+				$nama = $nama. "," .$db->row()->nama_produk;
 			}
 		}
-		// var_dump($barcode);
-		// exit();
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
+			'nama' => $nama,
 			'barcode' => $barcode,
 			'diskon_barang' => implode(',', $this->input->post('harga')),
 			'qty' => implode(',', $this->input->post('qty')),
@@ -128,6 +168,7 @@ class Transaksi extends CI_Controller {
 		$barcode = "";
 		$qty="";
 		$harga="";
+		$nama = "";
 		$sql = $this->db->get_where("keranjang", array('kasir' => $this->session->userdata('id')))->result();
 		$i = 0;
 		$produk = array();
@@ -143,15 +184,18 @@ class Transaksi extends CI_Controller {
 				$barcode = $data2->id_barang;
 				$qty = $data2->jumlah;
 				$harga = $data2->harga;
+				$nama = $dat->nama_produk;
 			} else {
 				$barcode = $barcode. "," .$data2->id_barang;
 				$qty = $qty. "," .$data2->jumlah;
 				$harga = $harga. "," .$data2->harga;
+				$nama = $nama. "," . $dat->nama_produk;
 			}
 			$i++;
 		}
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
+			'nama' => $nama,
 			'barcode' => $barcode,
 			'diskon_barang' => $harga,
 			'qty' => $qty,
@@ -366,22 +410,19 @@ class Transaksi extends CI_Controller {
 	public function cetak($id)
 	{
 		$produk = $this->transaksi_model->getAll($id);
-		
 		$tanggal = new DateTime($produk->tanggal);
 		$barcode = explode(',', $produk->barcode);
+		$nama = explode(',', $produk->nama);
 		$qty = explode(',', $produk->qty);
 		$diskon_barang = explode(',', $produk->diskon_barang);
 		$produk->tanggal = $tanggal->format('d m Y H:i:s');
-
-		$dataProduk = $this->transaksi_model->getName($barcode);
-		// var_dump($dataProduk);
-
-		foreach ($dataProduk as $key => $value) {
-			$value->total = $qty[$key];
-			$value->harga = $diskon_barang[$key];
-			$value->total_hrg = $value->harga * $qty[$key];
+		for($i = 0; $i < count($nama); $i++)
+		{
+			$dataProduk[$i]["nama"] = $nama[$i]; 
+			$dataProduk[$i]["harga"] = $diskon_barang[$i]; 
+			$dataProduk[$i]["qty"] = $qty[$i]; 
+			$dataProduk[$i]["total_hrg"] = $diskon_barang[$i] * $qty[$i]; 
 		}
-		
 		if($produk->diskon == "")
 		{
 			$produk->diskon = 0;
