@@ -97,6 +97,8 @@ function getNota1()
 
 function add()
 {
+    $("#add").attr("disabled", "disabled");
+    $("#cetak").attr("disabled", "disabled");
     $.ajax({
         url: savetrxBarang,
         type: "POST",
