@@ -46,6 +46,7 @@ class Transaksi extends CI_Controller {
 				}
 			}
 			$data2 = array(
+				'id' => $produk->id,
 				'tanggal' => $produk->tanggal,
 				'nama' => $nama,
 				'barcode' => $produk->barcode,
@@ -69,18 +70,21 @@ class Transaksi extends CI_Controller {
 			foreach ($this->transaksi_model->read()->result() as $transaksi) {
 				$nama = "";
 				$barcode = explode(',', $transaksi->barcode);
+				$nam = explode(',', $transaksi->nama);
 				$qt = explode(',', $transaksi->qty);
 				$diskon_barang = explode(',', $transaksi->diskon_barang);
 				$tanggal = new DateTime($transaksi->tanggal);
 				foreach($barcode as $key => $none)
 				{
-					$sql = $this->db->get_where("produk",array("id"=>$none));
-					if($sql->num_rows() > 0)
-					{
-						$nama = $nama . $sql->row()->nama_produk." - ".$diskon_barang[$key]." (". $qt[$key]. ")</br>--------------</br>";
-					} else {
-						$nama = $nama . "";
-					}
+					$nama = $nama . $nam[$key]." - ".$diskon_barang[$key]." (". $qt[$key]. ")</br>--------------</br>";
+
+					// $sql = $this->db->get_where("produk",array("id"=>$none));
+					// if($sql->num_rows() > 0)
+					// {
+					// 	$nama = $nama . $sql->row()->nama_produk." - ".$diskon_barang[$key]." (". $qt[$key]. ")</br>--------------</br>";
+					// } else {
+					// 	$nama = $nama . "";
+					// }
 				}
 				$data[] = array(
 					'tanggal' => $tanggal->format('d-m-Y H:i:s'),

@@ -31,7 +31,7 @@ class Transaksi_model extends CI_Model {
 
 	public function read()
 	{
-		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon_barang, transaksi.diskon, pelanggan.nama as pelanggan');
+		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.nama, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon_barang, transaksi.diskon, pelanggan.nama as pelanggan');
 		$this->db->from($this->table);
 		$this->db->join('pelanggan', 'transaksi.pelanggan = pelanggan.id', 'left outer');
 		return $this->db->get();
