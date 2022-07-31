@@ -188,6 +188,8 @@ function remove(nama) {
 }
 
 function add() {
+    $("#add").attr("disabled", "disabled");
+    $("#cetak").attr("disabled", "disabled");
     let data = transaksi.rows().data();
     let qty = [];
     let harga = [];
